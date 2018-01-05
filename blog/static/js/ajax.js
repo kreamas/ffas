@@ -217,8 +217,11 @@ $(document).ready(function(){
 						  }
 						}
 					  };
+
+						var container = document.getElementById('line_div');
+						var chart = new google.charts.Line(container);
 				
-					  var chart = new google.charts.Line(document.getElementById('line_div'));
+					  //var chart = new google.charts.Line(document.getElementById('line_div'));
 
 						// listen for error
 						google.visualization.events.addListener(chart, 'error', function (err) {
