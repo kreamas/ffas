@@ -193,7 +193,7 @@ $(document).ready(function(){
 					function drawForecastChart() {
 				
 					  var data = new google.visualization.DataTable();
-					  data.addColumn('number', 'Fecha');
+					  data.addColumn('string', 'Fecha');
 					  data.addColumn('number', 'Optimista');
 					  data.addColumn('number', 'Conservador');
 					  data.addColumn('number', 'Pesimista');
