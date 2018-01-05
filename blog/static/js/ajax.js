@@ -24,6 +24,8 @@ $(document).ready(function(){
 						$("#tunombre").append("<p> Tu eres un " + json.distrito + "</p>"),
 						$("#tunombre").append("<p> Tu eres un " + json.repre + "</p>"),
 						$("#tunombre").append("<p> " + json.df + "</p>")
+						$("#tunombre").append("<p> " + json.forecast + "</p>")
+						
 
 
 

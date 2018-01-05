@@ -13,6 +13,8 @@ import rpy2.robjects as ro
 from rpy2.robjects.packages import importr
 import rpy2.interactive as r
 
+importr("forecast")
+
 
 import json
 
@@ -103,12 +105,24 @@ def search(request):
     
     jsonDF = [['mush', 2], ['onion',4], ['potato', 3], ['corn', 7]]
 
+
+    #La ocupamos y la asignamos
+    e1 = ro.r('f1 <- auto.arima(WWWusage)')
+    e2 = ro.r('f2 <- forecast(f1,h=12)')
+    e3 = ro.r('f2$lower')
+    e4 = ro.r('as.matrix(f2$lower)[,2]')
     
+    e3 = list(e3)
     
+    print('forecast')
+    print(e3)
+
+    
+    print('otra cosa')
     print(df)
 
     #return HttpResponse(json.dumps(imprime), content_type = 'application/json')
-    return JsonResponse({'nombre': ititulo, 'region': iregion, 'distrito': idistrito, 'repre': irepre, 'df': jsonDF})
+    return JsonResponse({'nombre': ititulo, 'region': iregion, 'distrito': idistrito, 'repre': irepre, 'df': jsonDF, 'forecast': e3})
 
   
     
