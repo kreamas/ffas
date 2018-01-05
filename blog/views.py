@@ -13,6 +13,7 @@ import rpy2.robjects as ro
 from rpy2.robjects.packages import importr
 import rpy2.interactive as r
 
+importr(str("forecast"))
 
 
 
@@ -69,7 +70,6 @@ def search(request):
     iregion = region
 
 
-    importr(str("forecast"))
     
     idistrito = ""
     for i in range(len(distrito)):
