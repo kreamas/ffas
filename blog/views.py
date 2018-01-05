@@ -130,13 +130,13 @@ def search(request):
         con.append(ro.r('f2$mean')[i])
         pes.append(ro.r('f2$lower')[i])
     
-    
+    pronos.append(['Fecha', 'Optimista', 'Pesimista', 'Conservador'])
     for j in range(112):  
         fdat = str(fechas[j])
         fopt = int(float(opt[j]))
         fcon = int(float(con[j]))
         fpes = int(float(pes[j]))
-        pronos.append([fdat, fopt, fcon, fpes])    
+        pronos.append([fdat, fopt, fpes, fcon])    
            
            
     print('forecast')

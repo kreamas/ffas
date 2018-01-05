@@ -65,7 +65,7 @@ $(document).ready(function(){
 
 						<!--Google table -->
 
-					  google.charts.load('current', {'packages':['table', 'corechart', 'line']});
+					  google.charts.load('current', {'packages':['table', 'corechart']});
 					  google.charts.setOnLoadCallback(drawTable);
 				
 					  function drawTable() {
@@ -192,13 +192,7 @@ $(document).ready(function(){
 						setInterval(drawForecastChart(), 2000);
 					function drawForecastChart() {
 				
-					  var data = new google.visualization.DataTable();
-					  data.addColumn('string', 'Fecha');
-					  data.addColumn('number', 'Optimista');
-					  data.addColumn('number', 'Conservador');
-					  data.addColumn('number', 'Pesimista');
-				
-					  data.addRows(json.forecast);
+					  var data = google.visualization.arrayToDataTable(eval(json.forecast));
 
 					  var options = {
 						chart: {
@@ -217,7 +211,7 @@ $(document).ready(function(){
 					  };
 
 						var container = document.getElementById('line_div');
-						var chart = new google.charts.Line(container);
+						var chart = new google.visualization.LineChart(container);
 				
 					  //var chart = new google.charts.Line(document.getElementById('line_div'));
 
@@ -235,10 +229,10 @@ $(document).ready(function(){
 										  
 					  
 					  				
-					  chart.draw(data, google.charts.Line.convertOptions(options));
-					  //chart.draw(data, options);
+					  //chart.draw(data, google.charts.Line.convertOptions(options));
+					  chart.draw(data, options);
 					}
-					reload = setInterval(drawForecastChart(), 2000);
+//					reload = setInterval(drawForecastChart(), 2000);
 
 
 
