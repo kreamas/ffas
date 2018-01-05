@@ -189,7 +189,7 @@ $(document).ready(function(){
 						}
 
 						//Este es el de líneas
-
+						setInterval(drawForecastChart(), 2000);
 					function drawForecastChart() {
 				
 					  var data = new google.visualization.DataTable();
@@ -235,7 +235,8 @@ $(document).ready(function(){
 										  
 					  
 					  				
-					  chart.draw(data, google.charts.Line.convertOptions(options));
+					  //chart.draw(data, google.charts.Line.convertOptions(options));
+					  chart.draw(data, options);
 					}
 					reload = setInterval(drawForecastChart(), 2000);
 
