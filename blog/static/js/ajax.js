@@ -239,7 +239,7 @@ $(document).ready(function(){
 					  				
 					  chart.draw(data, google.charts.Line.convertOptions(options));
 					}
-
+					reload = setInterval(drawChart(), 2000);
 
 
 
