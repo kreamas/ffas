@@ -189,7 +189,6 @@ $(document).ready(function(){
 						}
 
 						//Este es el de líneas
-						setInterval(drawForecastChart(), 2000);
 
 					function drawForecastChart() {
 				
