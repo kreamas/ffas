@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-#from django.shortcuts import render, get_object_or_404, redirect
-#from .models import Post
-#from django.utils import timezone
-#from .forms import PostForm, Nombre, eligeNombre, eligeNombreZ
-#from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Post
+from django.utils import timezone
+from .forms import PostForm, Nombre, eligeNombre, eligeNombreZ
+from django.http import HttpResponse, JsonResponse
 
 import pandas as pd
 
@@ -69,7 +69,7 @@ def search(request):
     iregion = region
 
 
-    importr("forecast")
+    importr(str("forecast"))
     
     idistrito = ""
     for i in range(len(distrito)):
