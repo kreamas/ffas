@@ -23,8 +23,8 @@ $(document).ready(function(){
 						$("#tunombre").append("<p> Tu eres un " + json.region + "</p>"),
 						$("#tunombre").append("<p> Tu eres un " + json.distrito + "</p>"),
 						$("#tunombre").append("<p> Tu eres un " + json.repre + "</p>"),
-						$("#tunombre").append("<p> " + json.df + "</p>")
-						$("#tunombre").append("<p> " + json.forecast + "</p>")
+						//$("#tunombre").append("<p> " + json.df + "</p>")
+						//$("#tunombre").append("<p> " + json.forecast + "</p>")
 						
 
 
@@ -63,36 +63,6 @@ $(document).ready(function(){
 
 
 
-					
-						// Load the Visualization API and the piechart package.
-						google.charts.load('current', {'packages':['corechart']});
-						  
-						// Set a callback to run when the Google Visualization API is loaded.
-						google.charts.setOnLoadCallback(drawChart);
-						  
-						function drawChart() {
-						  // Create the data table.
-						  var data = new google.visualization.DataTable();
-						  data.addColumn('string', 'Topping');
-						  data.addColumn('number', 'Slices');
-						  data.addRows(eval(json.df));
-					
-						  // Set chart options
-						  var options = {'title':'How Much Pizza I Ate Last Night',
-										 'width':400,
-										 'height':300};
-					
-						  // Instantiate and draw our chart, passing in some options.
-						  var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-						  chart.draw(data, options);
-
-
-						}
-
-
-	
-
-
 						<!--Google table -->
 
 					  google.charts.load('current', {'packages':['table']});
@@ -120,7 +90,7 @@ $(document).ready(function(){
 				
 
 						<!-- Google Charts -->
-						
+
 					  // Load Charts and the corechart package.
 					  google.charts.load('current', {'packages':['corechart']});
 				
@@ -181,6 +151,84 @@ $(document).ready(function(){
 					  }						
 				
 
+
+
+
+
+
+						//Chart que mandé llamar desde Json
+
+						//Este es el de pie
+						
+						// Load the Visualization API and the piechart package.
+						google.charts.load('current', {'packages':['corechart', 'line']});
+						  
+						// Set a callback to run when the Google Visualization API is loaded.
+						google.charts.setOnLoadCallback(drawChart);
+						google.charts.setOnLoadCallback(drawForecastChart);
+						  
+						function drawChart() {
+						  // Create the data table.
+						  var data = new google.visualization.DataTable();
+						  data.addColumn('string', 'Topping');
+						  data.addColumn('number', 'Slices');
+						  
+						  //Aquí mando llamar los datos mediante eval()
+						  
+						  data.addRows(eval(json.df));
+					
+						  // Set chart options
+						  var options = {'title':'How Much Pizza I Ate Last Night',
+										 'width':400,
+										 'height':300};
+					
+						  // Instantiate and draw our chart, passing in some options.
+						  var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+						  chart.draw(data, options);
+
+						}
+
+						//Este es el de líneas
+						
+
+					function drawForecastChart() {
+				
+					  var data = new google.visualization.DataTable();
+					  data.addColumn('string', 'Fecha');
+					  data.addColumn('number', 'Optimista');
+					  data.addColumn('number', 'Conservador');
+					  data.addColumn('number', 'Pesimista');
+				
+					  data.addRows(json.forecast);
+				
+
+					  var options = {
+						chart: {
+						  title: 'Sales Forecast',
+						  subtitle: 'Total Market'
+						},
+						legend:{textStyle:{fontSize:'8'}},
+						tooltip:{textStyle:{fontSize:'6'}},
+						width: 400,
+						height: 300,
+						axes: {
+						  x: {
+							0: {side: 'bottom'}
+						  }
+						}
+					  };
+				
+					  var chart = new google.charts.Line(document.getElementById('line_div'));				
+					  chart.draw(data, google.charts.Line.convertOptions(options));
+					}
+
+
+
+
+
+
+
+					//Si fue el botón de refrescar
 					
 					} else {
 						

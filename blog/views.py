@@ -8,6 +8,7 @@ from .forms import PostForm, Nombre, eligeNombre, eligeNombreZ
 from django.http import HttpResponse, JsonResponse
 
 import pandas as pd
+import numpy as np
 
 import rpy2.robjects as ro
 from rpy2.robjects.packages import importr
@@ -108,6 +109,7 @@ def search(request):
     jsonDF = [['mush', 2], ['onion',4], ['potato', 3], ['corn', 7]]
 
 
+
     #La ocupamos y la asignamos
     e1 = ro.r('f1 <- auto.arima(WWWusage)')
     e2 = ro.r('f2 <- forecast(f1,h=12)')
@@ -116,15 +118,36 @@ def search(request):
     
     e3 = list(e3)
     
+    fechas = pd.to_datetime(pd.date_range('2012-01-01', periods = 112)).astype(str)
+    
+    pronos = []
+    opt = [x for x in ro.r("WWWusage")]
+    con = [x for x in ro.r("WWWusage")]
+    pes = [x for x in ro.r("WWWusage")]
+    
+    for i in range(12):
+        opt.append(ro.r('f2$upper')[i])
+        con.append(ro.r('f2$mean')[i])
+        pes.append(ro.r('f2$lower')[i])
+    
+    
+    for j in range(112):  
+        fdat = str(fechas[j])
+        fopt = int(float(opt[j]))
+        fcon = int(float(con[j]))
+        fpes = int(float(pes[j]))
+        pronos.append([fdat, fopt, fcon, fpes])    
+           
+           
     print('forecast')
-    print(e3)
+    print(pronos)
 
     
     print('otra cosa')
     print(df)
 
     #return HttpResponse(json.dumps(imprime), content_type = 'application/json')
-    return JsonResponse({'nombre': ititulo, 'region': iregion, 'distrito': idistrito, 'repre': irepre, 'df': jsonDF, 'forecast': e3})
+    return JsonResponse({'nombre': ititulo, 'region': iregion, 'distrito': idistrito, 'repre': irepre, 'df': jsonDF, 'forecast': pronos})
 
   
     
