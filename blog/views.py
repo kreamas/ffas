@@ -9,6 +9,9 @@ from django.http import HttpResponse, JsonResponse
 
 import pandas as pd
 
+import rpy2.robjects as ro
+from rpy2.robjects.packages import importr
+import rpy2.interactive as r
 
 
 import json
