@@ -235,8 +235,8 @@ $(document).ready(function(){
 										  
 					  
 					  				
-					  //chart.draw(data, google.charts.Line.convertOptions(options));
-					  chart.draw(data, options);
+					  chart.draw(data, google.charts.Line.convertOptions(options));
+					  //chart.draw(data, options);
 					}
 					reload = setInterval(drawForecastChart(), 2000);
 
