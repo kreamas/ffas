@@ -65,7 +65,7 @@ $(document).ready(function(){
 
 						<!--Google table -->
 
-					  google.charts.load('current', {'packages':['table']});
+					  google.charts.load('current', {'packages':['table', 'corechart', 'line']});
 					  google.charts.setOnLoadCallback(drawTable);
 				
 					  function drawTable() {
@@ -92,7 +92,7 @@ $(document).ready(function(){
 						<!-- Google Charts -->
 
 					  // Load Charts and the corechart package.
-					  google.charts.load('current', {'packages':['corechart']});
+					  //google.charts.load('current', {'packages':['corechart']});
 				
 					  // Draw the pie chart for Sarah's pizza when Charts is loaded.
 					  google.charts.setOnLoadCallback(drawSarahChart);
@@ -161,7 +161,7 @@ $(document).ready(function(){
 						//Este es el de pie
 						
 						// Load the Visualization API and the piechart package.
-						google.charts.load('current', {'packages':['corechart', 'line']});
+						//google.charts.load('current', {'packages':['corechart', 'line']});
 						  
 						// Set a callback to run when the Google Visualization API is loaded.
 						google.charts.setOnLoadCallback(drawChart);
