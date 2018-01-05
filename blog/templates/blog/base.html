@@ -1,6 +1,28 @@
 {% load staticfiles %}
 <html>
 	<head>
+    
+            
+        <script
+          src="https://code.jquery.com/jquery-3.2.1.min.js"
+          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+          crossorigin="anonymous"></script>
+        
+        <script
+          src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+          integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+          crossorigin="anonymous"></script>
+          
+        <!--<script type="text/javascript" src="jquery.min.js"></script>-->
+        <!--<script type="text/javascript" src="jquery-ui.min.js"></script>-->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*-->
+        
+        <script type = "text/javascript" src = "{% static 'js/ajax.js' %}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.3.2/js/tabulator.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    
+    
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         
@@ -9,26 +31,99 @@
 
         <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">        
         <link rel = "stylesheet" href = "{% static 'css/blog.css' %}">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.3.2/css/tabulator.min.css" rel="stylesheet">
     	
-    	<title>Blog de Krea Mas</title>
+    	<title>FFAS</title>
     </head>
     
     <body>
 
     	<div class = "page-header">
-        	{% if user.is_authenticated %}
-	        	<a href = "{% url 'post_new' %}" class = "top-menu"><span class = "glyphicon glyphicon-plus"></span></a>
-            {% endif %}
-        	<h1><a href = "">Blog de Krea Mas</a></h1>
+        	<h1><a href = "">FIELD FORCE ANALYSIS SYSTEM</a></h1>
         </div>
         
-        <div class = "content container">
-        	<div class = "row">
-            	<div class = "col-md-8">
-                {% block content %}
-                {% endblock %}
-				</div>                    
-			</div>
-		</div>        
+
+        <form  method="get" action = "{% url 'search' %}" id = "search-post">
+            <div>
+                <input type = "text" name = "title" />
+                
+                <p>Elije tu Region</p>
+                <p>
+                  <SELECT name="region" SIZE=1 id="region"> 
+                    <OPTION VALUE="REGION 1">REG 1</OPTION>
+                    <OPTION VALUE="REGION 2">REG 2</OPTION>
+                    <OPTION VALUE="REGION 3">REG 3</OPTION>
+                    <OPTION VALUE="REGION 4">REG 4</OPTION> 
+                  </SELECT>
+                </p>
+    
+                <input type = "submit" value="Refresh" id = "sRef" name = "sRefr"/>
+                
+                <p>Elije tu Distrito</p>
+                <p>
+                  <SELECT name="distrito" multiple = "multiple" SIZE=3 id="distrito" class = "listillas"> 
+                    <OPTION VALUE="DISTRITO 1">DIST 1</OPTION>
+                    <OPTION VALUE="DISTRITO 2">DIST 2</OPTION>
+                    <OPTION VALUE="DISTRITO 3">DIST 3</OPTION>
+                    <OPTION VALUE="DISTRITO 4">DIST 4</OPTION> 
+                  </SELECT>
+                </p>
+                
+                <p> Elije tu Repre</p>
+                <p>
+                  <SELECT name="repre" multiple = "multiple" SIZE=3 id="repre" class = "listillas"> 
+                    <OPTION VALUE="all" selected>All</OPTION>
+                  </SELECT>
+                </p>
+    
+    
+                <input type = "submit" value="buscar" id = "sBus" name = "sBuss"/>
+                <input type = "button" value="Selecciona Todo" id = "sAll"/>
+                <input type = "button" value="Elimina Todo" id = "sRem"/>
+                <input type = "button" value="Vaciar" id = "vaciar"/>
+            </div>
+    
+        </form>
+       
+    
+       <div id = "tunombre">
+       
+            <p> Sin nombre </p>
+            <p> Sin región </p>
+            <p> Sin distrito </p>
+            <p> Sin repre </p>
+            
+            <p> Tabla </p>
+            
+       </div>
+    
+    
+        <div id = "allCharts">
+        
+            <table class="columns">
+              <tr>
+                <td><div id="Sarah_chart_div" style="border: 1px solid #ccc"></div></td>
+                <td><div id="Anthony_chart_div" style="border: 1px solid #ccc"></div></td>
+              </tr>
+            </table>    
+        
+        </div>
+    
+        <div id="chart_div">
+        
+    
+        </div>						
+    
+    
+        <div id="table_div">
+    
+        </div>						
+    
+        <div id="example-table">
+    
+        </div>				
+    
+
+
     </body>
 </html>
