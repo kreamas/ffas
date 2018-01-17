@@ -82,7 +82,7 @@ $(document).ready(function(){
 				
 						var table = new google.visualization.Table(document.getElementById('table_div'));
 				
-						table.draw(data, {showRowNumber: true, width: '15%', height: '15%'});
+						table.draw(data, {showRowNumber: true});
 					  }
 				
 				
@@ -116,9 +116,9 @@ $(document).ready(function(){
 						]);
 				
 						// Set options for Sarah's pie chart.
-						var options = {title:'How Much Pizza Sarah Ate Last Night',
-									   width:400,
-									   height:300};
+						var options = {title:'How Much Pizza Sarah Ate Last Night'
+									   
+									   };
 				
 						// Instantiate and draw the chart for Sarah's pizza.
 						var chart = new google.visualization.PieChart(document.getElementById('Sarah_chart_div'));
@@ -141,9 +141,9 @@ $(document).ready(function(){
 						]);
 				
 						// Set options for Anthony's pie chart.
-						var options = {title:'How Much Pizza Anthony Ate Last Night',
-									   width:400,
-									   height:300};
+						var options = {title:'How Much Pizza Anthony Ate Last Night'
+									   
+									   };
 				
 						// Instantiate and draw the chart for Anthony's pizza.
 						var chart = new google.visualization.PieChart(document.getElementById('Anthony_chart_div'));
@@ -178,9 +178,9 @@ $(document).ready(function(){
 						  data.addRows(eval(json.df));
 					
 						  // Set chart options
-						  var options = {'title':'How Much Pizza I Ate Last Night',
-										 'width':400,
-										 'height':300};
+						  var options = {'title':'How Much Pizza I Ate Last Night'
+										 
+										 };
 					
 						  // Instantiate and draw our chart, passing in some options.
 						  var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
@@ -200,9 +200,9 @@ $(document).ready(function(){
 						  subtitle: 'Total Market'
 						},
 						legend:{textStyle:{fontSize:'8'}},
-						tooltip:{textStyle:{fontSize:'6'}},
-						width: 400,
-						height: 300,
+						tooltip:{textStyle:{fontSize:'12'}},
+						
+						
 						axes: {
 						  x: {
 							0: {side: 'bottom'}
@@ -235,6 +235,13 @@ $(document).ready(function(){
 //					reload = setInterval(drawForecastChart(), 2000);
 
 
+					$(window).resize(function(){
+					  drawSarahChart();
+					  drawAnthonyChart();
+					  drawChart();
+					  drawForecastChart();
+					  drawTable();
+					});
 
 
 

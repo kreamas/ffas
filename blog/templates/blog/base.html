@@ -1,16 +1,11 @@
 {% load staticfiles %}
+<!DOCTYPE html>
 <html>
 	<head>
 
-		<style type="text/css">  
-			.sidebar1 {
-				float: left;
-				width: 180px;
-				background-color: #EADCAE;
-				padding-bottom: 10px;
-			}
+		<meta name = "viewport" content = "initial-scale=2.0, width=device-width"/>
+		<meta charset = utf-8>
 		
-		</style>  
             
         <script
           src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -46,115 +41,139 @@
     </head>
     
     <body>
+    
+    	<div id = "wrapper">
 
-    	<div class = "page-header">
-        
-        
-            <table class="titulos" cellpadding="15">
-              <tr>
-                <td><img src="{% static "images/kreamas.png" %}" alt="Mi imagen" name="Insert_logo" width="180" height="90" id="Insert_logo" style="background-color: #FFFFFF; display:block;" /></td>
-                <td><h1>FIELD FORCE ANALYSIS SYSTEM</h1></td>
-              </tr>
-            </table>    
-        
-        
-        
-        	
-        </div>
-        
+            <div class = "page-header", id="header">
+            
+            
+                <table class="titulos" cellpadding="15">
+                  <tr>
+                    <td><img src="{% static "images/kreamas.png" %}" alt="Mi imagen" name="Insert_logo" width="180" height="90" id="Insert_logo" style="background-color: #FFFFFF; display:block;" /></td>
+                    <td><h1 id="titulo">FIELD FORCE ANALYSIS SYSTEM</h1></td>
+                  </tr>
+                </table>    
+            
+            	<div id = "navigation">
+                	<ul>
+                    	<li><a href = "#">Trend Analysis</a></li>
+                        <li><a href = "#">Development Analysis</a></li>
+                        <li><a href = "#">Territory Analysis</a></li>
+                     </ul>
+                 </div>
+            
+                
+            </div>
+            
+            
 
-		<div class = "sidebar1">
-
-            <form  method="get" action = "{% url 'search' %}" id = "search-post">
-                <div>
-                    <p> Escribe tu nombre </p>
-                    <input type = "text" name = "title" />
+            
+           <!-- Content -->
+           <div class = "content" id = "content">
+            
+               <div id = "tunombre">
+               
+                    <p> Sin nombre </p>
+                    <p> Sin región </p>
+                    <p> Sin distrito </p>
+                    <p> Sin repre </p>
                     
-                    <p>Elije tu Region</p>
-                    <p>
-                      <SELECT name="region" SIZE=1 id="region"> 
-                        <OPTION VALUE="REGION 1">REG 1</OPTION>
-                        <OPTION VALUE="REGION 2">REG 2</OPTION>
-                        <OPTION VALUE="REGION 3">REG 3</OPTION>
-                        <OPTION VALUE="REGION 4">REG 4</OPTION> 
-                      </SELECT>
-                    </p>
-        
-                    <input type = "submit" value="Refresh" id = "sRef" name = "sRefr"/>
+                    <p> Tabla </p>
                     
-                    <p>Elije tu Distrito</p>
-                    <p>
-                      <SELECT name="distrito" multiple = "multiple" SIZE=3 id="distrito" class = "listillas"> 
-                        <OPTION VALUE="DISTRITO 1">DIST 1</OPTION>
-                        <OPTION VALUE="DISTRITO 2">DIST 2</OPTION>
-                        <OPTION VALUE="DISTRITO 3">DIST 3</OPTION>
-                        <OPTION VALUE="DISTRITO 4">DIST 4</OPTION> 
-                      </SELECT>
-                    </p>
-                    
-                    <p> Elije tu Repre</p>
-                    <p>
-                      <SELECT name="repre" multiple = "multiple" SIZE=3 id="repre" class = "listillas"> 
-                        <OPTION VALUE="all" selected>All</OPTION>
-                      </SELECT>
-                    </p>
-        
-        
-                    <input type = "submit" value="buscar" id = "sBus" name = "sBuss"/>
-                    <input type = "button" value="Selecciona Todo" id = "sAll"/>
-                    <input type = "button" value="Elimina Todo" id = "sRem"/>
-                    <input type = "button" value="Vaciar" id = "vaciar"/>
+               </div>
+            
+            
+                <div id = "allCharts">
+                
+                    <table class="columns">
+                      <tr>
+                        <td><div class="grafico" id="Sarah_chart_div" style="border: 1px solid #ccc"></div></td>
+                        <td><div class="grafico" id="Anthony_chart_div" style="border: 1px solid #ccc"></div></td>
+                      </tr>
+                    </table>    
+                
                 </div>
-        
-            </form>
-           
-    	</div>
-        
-        
-       <div id = "tunombre">
-       
-            <p> Sin nombre </p>
-            <p> Sin región </p>
-            <p> Sin distrito </p>
-            <p> Sin repre </p>
             
-            <p> Tabla </p>
+                <div id="chart2">
+                
+                    <table class="columns">
+                      <tr>
+                        <td><div class="grafico" id="chart_div" style="border: 1px solid #ccc"></div></td>
+                        <td><div class="grafico" id="line_div" style="border: 1px solid #ccc"></div></td>
+                      </tr>
+                    </table>    
             
-       </div>
-    
-    
-        <div id = "allCharts">
+                </div>						
+            
+            
+                <div id="table_div">
+            
+                </div>						
+            
+                <div id="example-table">
+            
+                </div>				
         
-            <table class="columns">
-              <tr>
-                <td><div id="Sarah_chart_div" style="border: 1px solid #ccc"></div></td>
-                <td><div id="Anthony_chart_div" style="border: 1px solid #ccc"></div></td>
-              </tr>
-            </table>    
-        
-        </div>
-    
-        <div id="chart2">
-        
-            <table class="columns">
-              <tr>
-                <td><div id="chart_div" style="border: 1px solid #ccc"></div></td>
-                <td><div id="line_div" style="border: 1px solid #ccc"></div></td>
-              </tr>
-            </table>    
-    
-        </div>						
-    
-    
-        <div id="table_div">
-    
-        </div>						
-    
-        <div id="example-table">
-    
-        </div>				
-    
+            </div><!-- Fin del content -->
+            
 
+
+            <!-- Side Bar -->
+    
+            <div class = "sidebar1" id = "sidebar">
+    
+                <form  method="get" action = "{% url 'search' %}" id = "search-post">
+                    <div>
+                        <p> Escribe tu nombre </p>
+                        <input type = "text" name = "title" />
+                        
+                        <p>Elije tu Region</p>
+                        <p>
+                          <SELECT name="region" SIZE=1 id="region"> 
+                            <OPTION VALUE="REGION 1">REG 1</OPTION>
+                            <OPTION VALUE="REGION 2">REG 2</OPTION>
+                            <OPTION VALUE="REGION 3">REG 3</OPTION>
+                            <OPTION VALUE="REGION 4">REG 4</OPTION> 
+                          </SELECT>
+                        </p>
+            
+                        <input type = "submit" value="Refresh" id = "sRef" name = "sRefr"/>
+                        
+                        <p>Elije tu Distrito</p>
+                        <p>
+                          <SELECT name="distrito" multiple = "multiple" SIZE=3 id="distrito" class = "listillas"> 
+                            <OPTION VALUE="DISTRITO 1">DIST 1</OPTION>
+                            <OPTION VALUE="DISTRITO 2">DIST 2</OPTION>
+                            <OPTION VALUE="DISTRITO 3">DIST 3</OPTION>
+                            <OPTION VALUE="DISTRITO 4">DIST 4</OPTION> 
+                          </SELECT>
+                        </p>
+                        
+                        <p> Elije tu Repre</p>
+                        <p>
+                          <SELECT name="repre" multiple = "multiple" SIZE=3 id="repre" class = "listillas"> 
+                            <OPTION VALUE="all" selected>All</OPTION>
+                          </SELECT>
+                        </p>
+            
+            
+                        <input type = "submit" value="buscar" id = "sBus" name = "sBuss"/>
+                        <input type = "button" value="Selecciona Todo" id = "sAll"/>
+                        <input type = "button" value="Elimina Todo" id = "sRem"/>
+                        <input type = "button" value="Vaciar" id = "vaciar"/>
+                    </div>
+            
+                </form>
+               
+            </div><!-- Fin de Side Bar -->            
+            
+            <!-- Footer -->
+            
+            <div id = "footer">
+            	<p>Autor: Krea Mas 2017</p>
+            </div>
+            
+		</div> <!-- Del wrapper -->
 
     </body>
 </html>
