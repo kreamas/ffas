@@ -93,17 +93,10 @@ $(document).ready(function(){
 
 
 
-
-                
-                alert('ya pase');
-                console.log("success");
-                console.log(data);
                 
             },
             
             error: function(data){
-                console.log("error");
-                console.log(data);
             
             },
 		});
