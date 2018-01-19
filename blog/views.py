@@ -66,10 +66,7 @@ def post_edit(request, pk):
 def subefile(request):
     
 
-    print('ya entre')
     csvfile = request.FILES['csv_file']
-    print(csvfile)
-    print('ya pase')
 
     #csvfile = request.GET.get('titulo')
 
@@ -102,7 +99,6 @@ def subefile(request):
         fpes = int(float(pes[j]))
         pronos.append([fdat, fopt, fpes, fcon])    
     
-    print(pronos)
 
     #return
     return JsonResponse({'forecast': pronos})
