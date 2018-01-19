@@ -12,8 +12,6 @@ $(document).ready(function(){
 		e.preventDefault();
 
 
-
-
 	    var data = new FormData();
 	    qdata = $('#csv_file')[0].files[0];
 	    
@@ -27,12 +25,10 @@ $(document).ready(function(){
 			csrfmiddlewaretoken: csrf_token,
 			url: $(this).attr('action'),
 			type: $(this).attr('method'),
-			//dataType: "text/csv",
  			data: data,
  			
 			processData: false,
 			contentType: false, 					
- 			//data: 'titulo=saludos',
  			
 			success: function(json){
 				
@@ -41,29 +37,58 @@ $(document).ready(function(){
 				
 				alert('ya entre');
      			google.charts.load('current', {'packages':['corechart']});
+				google.charts.setOnLoadCallback(drawForecastChart);
 
-					google.charts.setOnLoadCallback(drawChart);
-					  
-					function drawChart() {
-					  // Create the data table.
-					  var data = new google.visualization.DataTable();
-					  data.addColumn('string', 'Topping');
-					  data.addColumn('number', 'Slices');
-					  
-					  //Aquí mando llamar los datos mediante eval()
-					  
-					  data.addRows(eval(json.df));
-				
-					  // Set chart options
-					  var options = {'title':'How Much Pizza I Ate Last Night'
-									 
-									 };
-				
-					  // Instantiate and draw our chart, passing in some options.
-					  var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-					  chart.draw(data, options);
 
+				function drawForecastChart() {
+			
+				  var data = google.visualization.arrayToDataTable(eval(json.forecast));
+
+				  var options = {
+					chart: {
+					  title: 'Sales Forecast',
+					  subtitle: 'Total Market'
+					},
+					legend:{textStyle:{fontSize:'8'}},
+					tooltip:{textStyle:{fontSize:'12'}},
+					
+					
+					axes: {
+					  x: {
+						0: {side: 'bottom'}
+					  }
 					}
+				  };
+
+					var container = document.getElementById('line_div');
+					var chart = new google.visualization.LineChart(container);
+			
+				  //var chart = new google.charts.Line(document.getElementById('line_div'));
+
+					// listen for error
+					google.visualization.events.addListener(chart, 'error', function (err) {
+					  // check error
+					  console.log(err.id, err.message);
+				
+					  // remove error
+					  google.visualization.errors.removeError(err.id);
+				
+					  // remove all errors
+					  google.visualization.errors.removeAll(container);
+					});
+									  
+				  
+				  				
+				  //chart.draw(data, google.charts.Line.convertOptions(options));
+				  chart.draw(data, options);
+				}
+//					reload = setInterval(drawForecastChart(), 2000);
+
+
+				$(window).resize(function(){
+				  drawForecastChart();
+				});
+
 
 
 
