@@ -6,9 +6,12 @@ from .models import Post
 from django.utils import timezone
 from .forms import PostForm, Nombre, eligeNombre, eligeNombreZ
 from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 import pandas as pd
 import numpy as np
+import csv
+from formulario import formulario
 
 import rpy2.robjects as ro
 from rpy2.robjects.packages import importr
@@ -59,7 +62,53 @@ def post_edit(request, pk):
     
     return render(request, 'blog/post_edit.html', {'form': form})
 
+@csrf_exempt
+def subefile(request):
+    
 
+    print('ya entre')
+    csvfile = request.FILES['csv_file']
+    print(csvfile)
+    print('ya pase')
+
+    #csvfile = request.GET.get('titulo')
+
+    decoded_file = csvfile.read().decode('utf-8').splitlines()
+    reader = csv.reader(decoded_file)
+    
+    lista = []
+    for row in reader:
+        lista.append(row[0])
+    
+    lista = lista[1:len(lista)]
+    
+    lizta = [np.float(x) for x in lista]
+    
+    dfPronos = formulario.forecazt(lizta, 24, 12)
+    
+    
+    fechas = pd.to_datetime(pd.date_range('2012-01-01', periods = len(dfPronos), freq="MS")).astype(str)
+    
+    pronos = []
+    opt = dfPronos['optimista'].tolist()
+    con = dfPronos['conservador'].tolist()
+    pes = dfPronos['pesimista'].tolist()
+    
+    pronos.append(['Fecha', 'Optimizt', 'Pezimizt', 'Konzervative'])
+    for j in range(len(dfPronos)):  
+        fdat = str(fechas[j])
+        fopt = int(float(opt[j]))
+        fcon = int(float(con[j]))
+        fpes = int(float(pes[j]))
+        pronos.append([fdat, fopt, fpes, fcon])    
+    
+    print(pronos)
+
+    #return
+    return JsonResponse({'forecast': pronos})
+    
+    
+    
 def search(request):
     titulo = request.GET.get('title')  #diccionario, lo que viene dentro del parentesis es el nombre del input text de html, al ser un diccionario podemos usar su metodo get
     region = request.GET.get('region')  #diccionario, lo que viene dentro del parentesis es el nombre del input text de html, al ser un diccionario podemos usar su metodo get
@@ -67,6 +116,13 @@ def search(request):
     repre = request.GET.getlist('repre')  #diccionario, lo que viene dentro del parentesis es el nombre del input text de html, al ser un diccionario podemos usar su metodo get
     boton = request.GET.get('btn')  #diccionario, lo que viene dentro del parentesis es el nombre del input text de html, al ser un diccionario podemos usar su metodo get
     
+    #datoz = request.FILES['subefile'].read()
+    
+    
+    
+    #print('hijole')
+    #print(datos)
+
     ititulo = titulo
     iregion = region
 
@@ -104,7 +160,7 @@ def search(request):
     df = pd.DataFrame(d)
     
     jsonDFv1 = df.to_json()
-    print(jsonDFv1)
+    #print(jsonDFv1)
     
     jsonDF = [['mush', 2], ['onion',4], ['potato', 3], ['corn', 7]]
 
@@ -139,12 +195,6 @@ def search(request):
         pronos.append([fdat, fopt, fpes, fcon])    
            
            
-    print('forecast')
-    print(pronos)
-
-    
-    print('otra cosa')
-    print(df)
 
     #return HttpResponse(json.dumps(imprime), content_type = 'application/json')
     return JsonResponse({'nombre': ititulo, 'region': iregion, 'distrito': idistrito, 'repre': irepre, 'df': jsonDF, 'forecast': pronos})

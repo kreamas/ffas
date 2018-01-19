@@ -18,4 +18,7 @@ urlpatterns = [
                url(r'^post/mensaje2/$', views.post_msj2, name = 'post_msj2'),
 
                url(r'search$', views.search, name='search'),
+
+               url(r'subefile$', views.subefile, name='subefile'),
+
 ]

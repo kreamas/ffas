@@ -22,6 +22,7 @@
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*-->
         
         <script type = "text/javascript" src = "{% static 'js/ajax.js' %}"></script>
+        <script type = "text/javascript" src = "{% static 'js/jquery.csv.min.js' %}"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.3.2/js/tabulator.min.js"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -161,9 +162,17 @@
                         <input type = "button" value="Selecciona Todo" id = "sAll"/>
                         <input type = "button" value="Elimina Todo" id = "sRem"/>
                         <input type = "button" value="Vaciar" id = "vaciar"/>
+                        
                     </div>
             
                 </form>
+
+			  <form method="post" action = "{% url 'subefile' %}" enctype="multipart/form-data" id = "salesForecast">
+			  
+			  	{% csrf_token %}
+			    <input type="file" name="csv_file" id="csv_file">
+			    <button type="submit">A ver si ya</button>
+			  </form>
                
             </div><!-- Fin de Side Bar -->            
             
