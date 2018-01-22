@@ -35,7 +35,6 @@ $(document).ready(function(){
 				
 				
 				
-				alert('ya entre');
      			google.charts.load('current', {'packages':['corechart']});
 				google.charts.setOnLoadCallback(drawForecastChart);
 
@@ -51,7 +50,12 @@ $(document).ready(function(){
 					},
 					legend:{textStyle:{fontSize:'8'}},
 					tooltip:{textStyle:{fontSize:'12'}},
-					
+
+                                        series: {
+                                          0: { color: '#619ea3' },
+                                          1: { color: '#e53306' },
+                                          2: { color: '#0348b0' },
+                                        },
 					
 					axes: {
 					  x: {
