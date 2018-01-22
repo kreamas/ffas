@@ -36,7 +36,7 @@ class formulario:
         ro.r("tdatin <- ts(datin, start = c(2012,1), frequency = " + str(zeazon) + ")")
         datos = ro.r("tdatin <- tsclean(tdatin)")
         
-
+        #Esta es la tendencia
         n1 = datos
         m1 = dlm(n1) + trend(1, discount = 1, name = 'a') + seasonality(zeazon, discount = 1, name = 'b')
         m1.fit()
