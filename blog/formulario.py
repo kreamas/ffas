@@ -38,7 +38,7 @@ class formulario:
         
 
         n1 = datos
-        m1 = dlm(n1) + trend(2, discount = 1, name = 'a') + seasonality(zeazon, discount = 1, name = 'b')
+        m1 = dlm(n1) + trend(1, discount = 1, name = 'a') + seasonality(zeazon, discount = 1, name = 'b')
         m1.fit()
 
         
