@@ -9,8 +9,11 @@ from pydlm import dlm, trend, seasonality
 import pandas as pd
 import numpy as np
 import scipy.stats
+
 import rpy2.robjects as ro
 from rpy2.robjects.packages import importr
+import rpy2.interactive as r
+
 
 
 
@@ -19,6 +22,20 @@ class formulario:
     @staticmethod    
     def forecazt(datos, predice, zeazon):
         qq = scipy.stats.norm.ppf(0.5 * (1+0.95))
+
+        lysta = ""
+        for i in range(len(datos)):
+            lysta = lysta + ", " + str(datos[i])
+        
+            
+        lysta = lysta[2:]
+        lysta = "c(" + lysta + ")"
+
+            
+        ro.r('datin <- ' + lysta)
+        ro.r("tdatin <- ts(datin, start = c(2012,1), frequency = " + str(zeazon) + ")")
+        datos = ro.r("tdatin <- tsclean(tdatin)")
+        
 
         n1 = datos
         m1 = dlm(n1) + trend(1, discount = 1, name = 'a') + seasonality(zeazon, discount = 1, name = 'b')
