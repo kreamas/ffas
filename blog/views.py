@@ -65,7 +65,7 @@ def post_edit(request, pk):
 @csrf_exempt
 def subefile(request):
     
-
+    #MEJORA
     csvfile = request.FILES['csv_file']
 
     #csvfile = request.GET.get('titulo')
