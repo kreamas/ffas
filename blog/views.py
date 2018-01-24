@@ -77,33 +77,41 @@ def subefile(request):
     for row in reader:
         lista.append(row[0])
     
-    lista = lista[1:len(lista)]
     
-    lizta = [np.float(x) for x in lista]
+    if lista[0] == 'KM':
+        
+        
+        
+        lista = lista[1:len(lista)]
+        
+        lizta = [np.float(x) for x in lista]
+        
+        dfPronos = formulario.forecazt(lizta, 24, 12)
+        
+        
+        fechas = pd.to_datetime(pd.date_range('2012-01-01', periods = len(dfPronos), freq="MS")).astype(str)
+        
+        pronos = []
+        opt = dfPronos['optimista'].tolist()
+        con = dfPronos['conservador'].tolist()
+        pes = dfPronos['pesimista'].tolist()
+        
+        pronos.append(['Fecha', 'Optimizt', 'Pezimizt', 'Konzervative'])
+        for j in range(len(dfPronos)):  
+            fdat = str(fechas[j])
+            fopt = int(float(opt[j]))
+            fcon = int(float(con[j]))
+            fpes = int(float(pes[j]))
+            pronos.append([fdat, fopt, fpes, fcon])    
+        
     
-    dfPronos = formulario.forecazt(lizta, 24, 12)
+        #return
+        return JsonResponse({'forecast': pronos})
     
-    
-    fechas = pd.to_datetime(pd.date_range('2012-01-01', periods = len(dfPronos), freq="MS")).astype(str)
-    
-    pronos = []
-    opt = dfPronos['optimista'].tolist()
-    con = dfPronos['conservador'].tolist()
-    pes = dfPronos['pesimista'].tolist()
-    
-    pronos.append(['Fecha', 'Optimizt', 'Pezimizt', 'Konzervative'])
-    for j in range(len(dfPronos)):  
-        fdat = str(fechas[j])
-        fopt = int(float(opt[j]))
-        fcon = int(float(con[j]))
-        fpes = int(float(pes[j]))
-        pronos.append([fdat, fopt, fpes, fcon])    
-    
-
-    #return
-    return JsonResponse({'forecast': pronos})
-    
-    
+    else:
+        
+        return
+        
     
 def search(request):
     titulo = request.GET.get('title')  #diccionario, lo que viene dentro del parentesis es el nombre del input text de html, al ser un diccionario podemos usar su metodo get
